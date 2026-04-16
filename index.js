@@ -98,12 +98,14 @@ app.delete('/api/persons/:id',(req, res)=>{
 })
 
 
-app.listen(PORT,()=>{
-    console.log(`running on port ${PORT}`)
-})
-
 app.get('(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
+
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`running on port ${PORT}`)
+    })
+}
 
 module.exports = app
